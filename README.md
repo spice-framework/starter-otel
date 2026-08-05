@@ -54,8 +54,19 @@ offline tests.
 make check
 make compatibility
 make verify
+make verify-release
 ```
 
 See [`docs/dependency-review.md`](docs/dependency-review.md) for the dependency
 and security review and [`docs/support.md`](docs/support.md) for the support
 policy.
+
+## Releases
+
+Each version tag is an ordinary Go module release. The repository also builds
+an exact-commit source archive, committed-graph SPDX 2.3 SBOM, SHA-256
+checksums, and an Ed25519 signature/public key without an external release
+build system. Production mode requires a clean checkout, exact tag, and
+protected signing key; an explicit unsigned rehearsal is available for local
+proof. See [`docs/releasing.md`](docs/releasing.md) for the artifact and trust
+contract.

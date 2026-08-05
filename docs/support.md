@@ -20,3 +20,7 @@ module and compatibility-contract change with green minimum/current evidence.
 Traces and metrics are supported. The OpenTelemetry logs API and all exporters
 are deliberately outside this starter until they receive independent API,
 dependency, maintenance, cancellation, security, and operability review.
+
+Release artifacts are produced only from an exact tagged commit under the
+contract in [`releasing.md`](releasing.md). A compromised or missing signing
+secret fails a production release; it never falls back to unsigned output.
