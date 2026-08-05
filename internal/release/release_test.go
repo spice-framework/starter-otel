@@ -74,6 +74,7 @@ func TestBuildUsesCommittedSourceAndSupportsUnsignedRehearsal(t *testing.T) {
 	root, commit := newReleaseRepository(t)
 	writeFile(t, filepath.Join(root, "tracked.txt"), "dirty\n")
 	writeFile(t, filepath.Join(root, "untracked-secret.txt"), "must not ship\n")
+	committedContent := git(t, root, "show", commit+":tracked.txt")
 	output := filepath.Join(root, "unsigned")
 	result, err := Build(context.Background(), Config{
 		Root: root, OutputDir: output, Version: "v0.0.0-rehearsal",
@@ -86,8 +87,10 @@ func TestBuildUsesCommittedSourceAndSupportsUnsignedRehearsal(t *testing.T) {
 		t.Fatalf("unsigned files = %v", result.Files)
 	}
 	archive := readArchive(t, filepath.Join(output, "starter-otel_0.0.0-rehearsal_source.tar.gz"))
-	if got := string(archive["starter-otel_0.0.0-rehearsal/tracked.txt"]); got != "committed\n" {
-		t.Fatalf("tracked content = %q", got)
+	if got := string(archive["starter-otel_0.0.0-rehearsal/tracked.txt"]); got != committedContent {
+		t.Fatalf("tracked content = %q, committed content = %q", got, committedContent)
+	} else if got == string(readFile(t, filepath.Join(root, "tracked.txt"))) {
+		t.Fatal("source archive used dirty working-tree bytes instead of committed bytes")
 	}
 	if _, found := archive["starter-otel_0.0.0-rehearsal/untracked-secret.txt"]; found {
 		t.Fatal("untracked file appeared in source artifact")
