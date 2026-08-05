@@ -129,9 +129,13 @@ func prepareDependencies(ctx context.Context, root string) error {
 	if err := networkCommand(ctx, root, "-C", "tools", "mod", "download"); err != nil {
 		return err
 	}
-	// A tools module's tidy graph includes test-only dependencies of tool
-	// packages. They are intentionally not fetched by `go mod download`, so the
-	// read-only tidy check belongs in this explicit network-capable phase.
+	// Tidy graphs can include test-only dependencies that `go mod download`
+	// intentionally leaves uncached. Prime both graphs with read-only tidy checks
+	// during the sole network-capable phase, then repeat the product check with
+	// GOPROXY=off in checkModule.
+	if err := networkCommand(ctx, root, "mod", "tidy", "-diff"); err != nil {
+		return err
+	}
 	if err := networkCommand(ctx, root, "-C", "tools", "mod", "tidy", "-diff"); err != nil {
 		return err
 	}
