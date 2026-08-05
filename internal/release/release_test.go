@@ -372,6 +372,7 @@ func newReleaseRepository(t *testing.T) (string, string) {
 	git(t, root, "init", "-q")
 	git(t, root, "config", "user.name", "Spice Test")
 	git(t, root, "config", "user.email", "test@spice.invalid")
+	git(t, root, "config", "core.autocrlf", "true")
 	git(t, root, "add", ".")
 	commitFixture(t, root, "fixture")
 	return root, strings.TrimSpace(git(t, root, "rev-parse", "HEAD"))

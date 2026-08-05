@@ -15,14 +15,17 @@ For `v1.2.3`, the release builder produces:
 | `checksums.txt.sig` | Raw Ed25519 signature of the exact checksum bytes |
 | `checksums.txt.pem` | X.509 SubjectPublicKeyInfo PEM for signature verification |
 
-The source archive is reconstructed from `git archive` for the full commit ID.
-Every tar and gzip timestamp is the source commit epoch; paths are relative,
-ownership is zeroed, modes are normalized, and gzip output is deterministic.
-Dirty or untracked workspace files cannot enter the archive. The SBOM creation
-time uses the same epoch and contains no absolute checkout path. Construction
-fails when committed module selection, checksums, and vendored versions or
-replacements disagree; the builder does not rely on an earlier verifier to
-detect a stale dependency graph.
+The source archive is reconstructed from the full commit's `git ls-tree`
+identity and exact object bytes read through `git cat-file --batch`. It never
+uses checkout filters or `git archive`, so `core.autocrlf` and host line-ending
+settings cannot alter an artifact. Every tar and gzip timestamp is the source
+commit epoch; paths are relative, ownership is zeroed, executable modes and
+validated symlinks are preserved, and gzip output is deterministic. Gitlinks
+and unsupported modes fail closed. Dirty or untracked workspace files cannot
+enter the archive. The SBOM creation time uses the same epoch and contains no
+absolute checkout path. Construction fails when committed module selection,
+checksums, and vendored versions or replacements disagree; the builder does
+not rely on an earlier verifier to detect a stale dependency graph.
 
 ## Production ceremony
 
