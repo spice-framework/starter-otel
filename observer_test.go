@@ -2,6 +2,7 @@ package otel
 
 import (
 	"context"
+	"errors"
 	"testing"
 
 	sdkmetric "go.opentelemetry.io/otel/sdk/metric"
@@ -61,4 +62,44 @@ func TestObserverComposesHTTPAndEventAdapters(t *testing.T) {
 	); got != ctx || finish != nil {
 		t.Fatal("nil BeginEvent() did not preserve the context")
 	}
+}
+
+func TestObserverPreservesCallerCancellation(t *testing.T) {
+	t.Parallel()
+	tracerProvider := sdktrace.NewTracerProvider()
+	meterProvider := sdkmetric.NewMeterProvider()
+	t.Cleanup(func() {
+		if err := tracerProvider.Shutdown(context.Background()); err != nil {
+			t.Errorf("TracerProvider.Shutdown() error = %v", err)
+		}
+		if err := meterProvider.Shutdown(context.Background()); err != nil {
+			t.Errorf("MeterProvider.Shutdown() error = %v", err)
+		}
+	})
+	observer, err := NewObserver(Options{
+		TracerProvider: tracerProvider,
+		MeterProvider:  meterProvider,
+	})
+	if err != nil {
+		t.Fatalf("NewObserver() error = %v", err)
+	}
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+	httpContext, finishHTTP := observer.BeginHTTP(ctx, web.RouteMetadata{
+		ID: "route", Method: "GET", Pattern: "/",
+	})
+	if !errors.Is(context.Cause(httpContext), context.Canceled) {
+		t.Fatalf("HTTP context cause = %v, want context.Canceled", context.Cause(httpContext))
+	}
+	finishHTTP(web.HTTPResult{Status: 200})
+	eventContext, finishEvent := observer.BeginEvent(ctx, spiceevent.Interaction{
+		Event: spiceevent.Definition{ID: "event", Module: "publisher"},
+		Subscriber: spiceevent.SubscriberMetadata{
+			ID: "subscriber", Module: "consumer",
+		},
+	})
+	if !errors.Is(context.Cause(eventContext), context.Canceled) {
+		t.Fatalf("event context cause = %v, want context.Canceled", context.Cause(eventContext))
+	}
+	finishEvent(spiceevent.Result{})
 }

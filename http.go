@@ -19,7 +19,7 @@ import (
 	"github.com/spice-framework/spice/web"
 )
 
-const instrumentationName = "github.com/spice-framework/spice/starter/otel"
+const instrumentationName = "github.com/spice-framework/starter-otel"
 
 // Options supplies the application-owned OpenTelemetry providers.
 type Options struct {

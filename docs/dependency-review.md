@@ -1,6 +1,7 @@
 # Dependency review: OpenTelemetry Go
 
-- Decision: approved for the isolated `starter/otel` package.
+- Decision: approved for the independently versioned
+  `github.com/spice-framework/starter-otel` module.
 - Version: `go.opentelemetry.io/otel` and SDK v1.44.0.
 - Upstream: <https://github.com/open-telemetry/opentelemetry-go>.
 - License: Apache-2.0; retained in vendored module license files.
@@ -24,7 +25,8 @@
   `@otel.Enable` must occur on the application marker. The compiler validates
   the exact HTTP-observer output and reachable mux capability before generated
   code directly composes the constructor result.
-- Transitive scope: OpenTelemetry API/SDK support libraries only. No collector,
+- Transitive scope: OpenTelemetry API/SDK support libraries plus their small
+  logging, UUID, and platform support graph only. No collector,
   network exporter, protobuf, gRPC, or Prometheus dependency is accepted by
   this slice.
 
