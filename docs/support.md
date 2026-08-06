@@ -8,7 +8,7 @@
 | Operating systems | Windows, Linux, and macOS |
 | Architectures | amd64 and arm64 compilation through public Go APIs |
 | Exporters | Application-owned; none bundled |
-| Central release tools | `github.com/spice-framework/development/cmd/spice-dev` at `v0.0.0-20260806121906-963bb6676069`; `github.com/spice-framework/toolchain/cmd/spice-library-release-verify` at `v0.0.0-20260806054457-a83d9b58034c` |
+| Central release tools | `github.com/spice-framework/development/cmd/spice-dev` at `v0.0.0-20260806132124-4c308d1b9fda`; `github.com/spice-framework/toolchain/cmd/spice-library-release-verify` at `v0.0.0-20260806133530-71211498297c` |
 
 `spice-compatibility.json` is the sole compatibility boundary source. Its
 minimum must equal the exact direct Spice requirement in `go.mod`; its current
