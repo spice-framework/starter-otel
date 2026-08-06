@@ -32,6 +32,6 @@ production workflow. The reviewed repository-specific trust anchor is
 `9cddc67e1d2a0e30ba9157364929ea9ca8529ba05b0dce9e009526d0491ed9bf`).
 Its private key exists only as repository Actions secret
 `SPICE_LIBRARY_RELEASE_SIGNING_KEY`, and the caller explicitly maps only that
-secret to the protected reusable workflow. Windows and Linux CI still compare
-unsigned central and retained outputs under vendor-only offline resolution; the
-retained command is only a parity oracle until the first signed cutover passes.
+secret to the protected reusable workflow. Windows and Linux CI render the same
+inert central plan twice under vendor-only offline resolution and require
+byte-identical unsigned artifacts.

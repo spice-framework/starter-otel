@@ -14,9 +14,8 @@ hidden network access.
 Add positive and failure-path tests, update public documentation, run
 `make verify` on the exact commit tree, and push only a green commit.
 
-Release-parity work must preserve the exact central release-tool versions
-authorized by the root `go.mod`, invoke full package paths, and run both central
-and retained rehearsals with workspace and network resolution disabled in vendor
-mode. The protected central workflow is the production authority; the retained
-repository builder remains an unsigned parity oracle and must never receive
-signatures or key material.
+Release-rehearsal work must preserve the exact central release-tool versions
+authorized by the root `go.mod`, invoke their full package paths, and render
+the same inert plan twice with workspace and network resolution disabled in
+vendor mode. The protected central workflow is the sole production builder. An
+unsigned rehearsal must never manufacture signatures or key material.

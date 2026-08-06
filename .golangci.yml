@@ -111,11 +111,6 @@ linters:
         text: 'use of `os\.Exit`'
         linters:
           - forbidigo
-      - path: "cmd[/\\\\]starter-otel-release[/\\\\]main\\.go$"
-        text: 'use of `os\.Exit`'
-        linters:
-          - forbidigo
-
 formatters:
   enable:
     - gofumpt
@@ -133,4 +128,3 @@ output:
   sort-order:
     - file
     - linter
-
