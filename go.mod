@@ -5,7 +5,7 @@ go 1.26.0
 toolchain go1.26.5
 
 require (
-	github.com/spice-framework/spice v0.0.0-20260805175412-383c17744300
+	github.com/spice-framework/spice v0.0.0-20260805222830-a2ecd56df246
 	go.opentelemetry.io/otel v1.44.0
 	go.opentelemetry.io/otel/metric v1.44.0
 	go.opentelemetry.io/otel/sdk v1.44.0
@@ -18,9 +18,14 @@ require (
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/spice-framework/development v0.0.0-20260806034648-1856466df09d // indirect
+	github.com/spice-framework/development v0.0.0-20260806052122-9025218a91c0 // indirect
+	github.com/spice-framework/toolchain v0.0.0-20260806054457-a83d9b58034c // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
+	golang.org/x/mod v0.38.0 // indirect
 	golang.org/x/sys v0.47.0 // indirect
 )
 
-tool github.com/spice-framework/development/cmd/spice-dev
+tool (
+	github.com/spice-framework/development/cmd/spice-dev
+	github.com/spice-framework/toolchain/cmd/spice-library-release-verify
+)

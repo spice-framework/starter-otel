@@ -58,11 +58,12 @@ make verify
 make verify-release
 ```
 
-Release parity runs the exact `spice-dev` tool authorized by `go.mod` and the
-retained repository builder twice each, entirely from `vendor` with network and
-workspace resolution disabled. It requires byte-identical source archives,
-regular bounded artifact reads, complete bounded gzip/tar validation, rejection
-of hidden data, raw suffixes, and extra members, equivalent SBOM facts,
+Release parity validates the exact `spice-dev` renderer and
+`spice-library-release-verify` verifier authorized by `go.mod`, then runs the
+renderer and retained repository builder twice each, entirely from `vendor`
+with network and workspace resolution disabled. It requires byte-identical
+source archives, regular bounded artifact reads, complete bounded gzip/tar
+validation, rejection of hidden data, raw suffixes, and extra members, equivalent SBOM facts,
 canonical checksum files, and no rehearsal signatures on Windows or Linux.
 
 See [`docs/dependency-review.md`](docs/dependency-review.md) for the dependency

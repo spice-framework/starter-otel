@@ -14,9 +14,9 @@ hidden network access.
 Add positive and failure-path tests, update public documentation, run
 `make verify` on the exact commit tree, and push only a green commit.
 
-Release-parity work must preserve the exact `spice-dev` tool version authorized
-by the root `go.mod`, invoke its full package path, and run both central and
-retained rehearsals with workspace and network resolution disabled in vendor
+Release-parity work must preserve the exact central release-tool versions
+authorized by the root `go.mod`, invoke full package paths, and run both central
+and retained rehearsals with workspace and network resolution disabled in vendor
 mode. The retained repository builder and signed production workflow remain
 authoritative until a separately reviewed signing migration; unsigned parity
 must never manufacture signatures or key material.
