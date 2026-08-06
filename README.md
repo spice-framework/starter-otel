@@ -53,9 +53,17 @@ offline tests.
 ```text
 make check
 make compatibility
+make release-parity
 make verify
 make verify-release
 ```
+
+Release parity runs the exact `spice-dev` tool authorized by `go.mod` and the
+retained repository builder twice each, entirely from `vendor` with network and
+workspace resolution disabled. It requires byte-identical source archives,
+regular bounded artifact reads, complete bounded gzip/tar validation, rejection
+of hidden data, raw suffixes, and extra members, equivalent SBOM facts,
+canonical checksum files, and no rehearsal signatures on Windows or Linux.
 
 See [`docs/dependency-review.md`](docs/dependency-review.md) for the dependency
 and security review and [`docs/support.md`](docs/support.md) for the support
@@ -70,3 +78,6 @@ build system. Production mode requires a clean checkout, exact tag, and
 protected signing key; an explicit unsigned rehearsal is available for local
 proof. See [`docs/releasing.md`](docs/releasing.md) for the artifact and trust
 contract.
+The retained repository builder and signed production workflow remain the
+release authority while the centrally rendered unsigned candidate is held to
+the dual-builder parity contract.
