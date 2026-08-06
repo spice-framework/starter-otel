@@ -36,18 +36,19 @@ immutable commit. Before any release tag is created, a release owner must:
 1. generate a user-owned Ed25519 private key dedicated to this repository;
 2. review and commit its public key as
    `security/release/ed25519-public.pem` (SHA-256 fingerprint
-   `dd6fc8e44c6051d387d026481bb3871be7e24685aa6a37313d55e4e2ac82528b`);
-3. store the private key as `SPICE_LIBRARY_RELEASE_SIGNING_KEY` only in the
-   protected `release-signing` environment; and
+   `9cddc67e1d2a0e30ba9157364929ea9ca8529ba05b0dce9e009526d0491ed9bf`);
+3. store the private key only as repository Actions secret
+   `SPICE_LIBRARY_RELEASE_SIGNING_KEY`; and
 4. configure protected `release-signing` and `release-publish` environments
    with the required human reviewers.
 
 Do not create or push a release tag until all four controls exist. The caller
-maps no secrets. The reusable workflow obtains the signing key only from its
-`release-signing` job, validates the exact tag and public trust anchor, signs
-with the centrally pinned tool, independently verifies with the separately
-pinned verifier, and publishes only through `release-publish`. A missing key,
-anchor, environment, review, or verification result fails closed.
+explicitly maps only the repository signing secret; secret inheritance and
+additional mappings are forbidden. The reusable workflow validates the exact
+tag and public trust anchor, signs with the centrally pinned tool, independently
+verifies with the separately pinned verifier, and publishes only through the
+protected environments. A missing key, anchor, environment, review, or
+verification result fails closed.
 
 ## Unsigned dual-builder rehearsal
 
