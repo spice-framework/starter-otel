@@ -1,5 +1,7 @@
 # Spice OpenTelemetry starter
 
+Unified documentation: [spiceframework.dev/integrations/opentelemetry](https://spiceframework.dev/integrations/opentelemetry/).
+
 `github.com/spice-framework/starter-otel` is the independently versioned,
 opt-in OpenTelemetry adapter for Spice applications. It turns generated HTTP
 route metadata and typed module-event interactions into traces and bounded
