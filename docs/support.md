@@ -2,7 +2,7 @@
 
 | Contract | Current development support |
 |---|---|
-| Go | Exactly 1.26.5 for development and release verification |
+| Go | Exactly 1.26.6 for development and release verification |
 | Spice minimum/current | Exact versions in [`spice-compatibility.json`](../spice-compatibility.json) |
 | OpenTelemetry Go | API and SDK v1.44.0 |
 | Operating systems | Windows, Linux, and macOS |

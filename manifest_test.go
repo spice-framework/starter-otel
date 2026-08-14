@@ -48,7 +48,7 @@ func TestManifestDeclaresIndependentOpenTelemetryStarter(t *testing.T) {
 		spec.Dependencies[2].Module != "go.opentelemetry.io/otel/trace" {
 		t.Fatalf("Manifest().Dependencies = %#v", spec.Dependencies)
 	}
-	if err := manifest.Compatible(spicestarter.APIVersion, "go1.26.5"); err != nil {
+	if err := manifest.Compatible(spicestarter.APIVersion, "go1.26.6"); err != nil {
 		t.Fatalf("Compatible() error = %v", err)
 	}
 	content, err := manifest.JSON()

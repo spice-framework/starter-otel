@@ -45,7 +45,7 @@ state.
 
 ## Compatibility and verification
 
-Development and verification require exactly Go 1.26.5. The machine-readable
+Development and verification require exactly Go 1.26.6. The machine-readable
 [`spice-compatibility.json`](spice-compatibility.json) records the provisional
 minimum and current supported Spice core lines. The complete gate proves both
 lines through isolated modfiles, exact MVS selection, vet, shuffled race tests,

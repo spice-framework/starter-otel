@@ -4,7 +4,7 @@ This repository owns the independently versioned OpenTelemetry integration for
 Spice. Work directly on local `main` in bounded commits. Fetch before editing
 and immediately before pushing; never overwrite unexpected remote work.
 
-Go 1.26.5 is mandatory. Every product change must preserve caller-owned
+Go 1.26.6 is mandatory. Every product change must preserve caller-owned
 providers and contexts, bounded low-cardinality attributes, module-aware
 telemetry, idempotent completion callbacks, payload-free diagnostics, and the
 public Spice HTTP and event observer contracts. The starter must never install
